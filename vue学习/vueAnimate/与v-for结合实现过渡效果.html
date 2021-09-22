@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="..//vue.js"></script>
+    <title>列表过渡使用transition-group</title>
+    <style>
+      body {
+        background-color: seagreen;
+      }
+
+      .hah {
+        list-style: none;
+        border: 1px dashed paleturquoise;
+        text-align: center;
+        height: 30px;
+        width: 100%;
+        line-height: 30px;
+        margin: 5px;
+      }
+
+      .hah:hover {
+        background-color: plum;
+        transition: all 0.8s ease;
+      }
+
+      input[type='button'] {
+        background-color: skyblue;
+      }
+
+      .my-enter,
+      .my-leave-to {
+        transform: translateY(15px);
+        opacity: 0;
+      }
+
+      .my-enter-active,
+      .my-leave-active {
+        transition: all 1.5s ease;
+      }
+
+      /* 下面v-move配合使用能够实现列表后面的元素渐渐飘上来的感觉 */
+      .my-move {
+        transition: all 1.5s;
+      }
+      /*  要让删除的元素先脱离文档流，旁边的元素才能过渡过来*/
+      .my-leave-active {
+        position: absolute;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main id="app">
+      <label>id</label><input type="text" v-model="id" /> <label>book</label
+      ><input type="text" v-model="book" />
+
+      <input type="button" value="添加" @click="add" />
+      <!-- appear定义本身有过渡效果，tag规定包裹子元素的标签 -->
+      <transition-group appear tag="ul" name="my">
+        <!--内部元素必须提供唯一key  -->
+        <li
+          v-for="(item, index) in list"
+          :key="item.title"
+          :class="style"
+          @click="del(index)"
+        >
+          {{item.book}}
+        </li>
+      </transition-group>
+    </main>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          list: [
+            { title: '1', book: '春物' },
+            { title: '2', book: '大佬' },
+            { title: '3', book: '白雪' },
+            { title: '4', book: '白雪' },
+            { title: '5', book: '白雪' },
+          ],
+          style: {
+            hah: true,
+          },
+          id: '',
+          book: '',
+        },
+        methods: {
+          add() {
+            this.list.push({ title: this.id, book: this.book });
+          },
+          del(index) {
+            this.list.splice(index, 1);
+            console.log('ok');
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

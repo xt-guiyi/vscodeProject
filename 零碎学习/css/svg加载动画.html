@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>svg加载动画</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background-color: #000222;
+      }
+      .circle {
+        stroke-dasharray: 62;
+        stroke-dashoffset: 5;
+        transform-origin: center;
+        /* animation: rotates 0.8s linear infinite, strokes 3.4s linear infinite; */
+      }
+      @keyframes rotates {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes strokes {
+        0% {
+          stroke-dashoffset: 5;
+        }
+        100% {
+          stroke-dashoffset: 129;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <svg viewBox="0 0 200 100 ">
+      <circle
+        class="circle"
+        cx="100"
+        cy="50"
+        r="10"
+        stroke="#fff"
+        stroke-width="2"
+        stroke-linecap="round"
+      ></circle>
+    </svg>
+  </body>
+</html>

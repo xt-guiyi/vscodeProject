@@ -1,0 +1,49 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-01-08 11:17:59
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-01-08 12:00:09
+-->
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas></canvas>
+  <script>
+    const canvas = document.querySelector('canvas')
+    canvas.width = 500
+    canvas.height = 250
+    const renderingContext = canvas.getContext('2d')
+    // 画矩形
+    const rectPath = new Path2D()
+    rectPath.rect(25, 25, 50, 50)
+    // 画三角形
+    const arcPath = new Path2D()
+    arcPath.moveTo(50, 85)
+    arcPath.lineTo(25, 125)
+    arcPath.lineTo(75, 125)
+    //画笑脸
+    const smileFacePath = new Path2D()
+    smileFacePath.arc(250, 150, 50, 0, 2* Math.PI, true)
+    // 口
+    smileFacePath.moveTo(275, 165)
+    smileFacePath.arc(250, 165, 25, 0,   Math.PI, false )
+    // 眼
+    smileFacePath.moveTo(230, 135)
+    smileFacePath.arc(225, 135, 5, 0,  2* Math.PI, true )
+    smileFacePath.moveTo(280, 135)
+    smileFacePath.arc(275, 135, 5, 0,  2* Math.PI, true )
+
+
+    renderingContext.fill(rectPath)
+    renderingContext.fill(arcPath)
+    renderingContext.stroke(smileFacePath)
+
+  </script>
+</body>
+</html>

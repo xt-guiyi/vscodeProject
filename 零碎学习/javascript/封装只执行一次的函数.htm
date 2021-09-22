@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>once函数</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var count = 1;
+      function out() {
+        console.log(count++);
+      }
+
+      function once(callBack) {
+        var tag = true;
+        return function () {
+          if (tag) {
+            tag = !tag;
+            callBack();
+          }
+        };
+      }
+      var t = once(out);
+      t();
+      t();
+      t();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2020-05-29 16:44:27
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-01-23 14:34:18
+-->
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对象深度克隆</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var obj = {
+        name: '张三',
+        age: 18,
+        property: {
+          vehicle: '奔驰',
+          houseNumber: 2,
+        },
+      };
+      var arr = [1, 1, 34, 45, '李四', true, { name: '里面' }];
+
+      function deepClone(object = {}) {
+        var newObj = Array.isArray(object) ? [] : {};
+        for (let key in object) {
+          if (object.hasOwnProperty(key)) {
+            var temple =
+              typeof object[key] === 'object'
+                ? deepClone(object[key])
+                : object[key];
+            newObj[key] = temple;
+          }
+        }
+        return newObj;
+      }
+      console.log(deepClone(obj));
+      console.log(deepClone(arr));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现promise</title>
+  </head>
+  <body>
+    <script>
+      function myPromise(callBack) {
+        let self = this;
+        self.status = 'pending';
+        self.value = undefined;
+        self.reason = undefined;
+        function resolve(value) {
+          if (self.status === 'pending') {
+            self.status = 'resolve';
+            self.value = value;
+          }
+        }
+        function reject(reason) {
+          if (self.status === 'pending') {
+            self.reason = reason;
+            self.status = 'reject';
+          }
+        }
+        try {
+          callBack(resolve, reject);
+        } catch (e) {
+          reject(e);
+        }
+      }
+
+      myPromise.prototype.then = function (onFullFilled, onRejected) {
+        let self = this;
+        if (self.status === 'resolve') {
+          onFullFilled(self.value);
+        } else if (self.status === 'reject') {
+          onRejected(self.reason);
+        }
+      };
+
+      // test
+      var firstPromise = new myPromise(function (resolve, reject) {
+        resolve(1);
+      });
+      console.log(firstPromise);
+      firstPromise.then(function (data) {
+        console.log(data);
+      });
+    </script>
+  </body>
+</html>

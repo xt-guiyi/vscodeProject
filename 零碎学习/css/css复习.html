@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta name="keywords" content="复习html5" />
+    <meta name="description" content="我在复习" />
+    <meta name="author" content="熊涛" />
+    <script type="text/javascript">
+      var stt = new Array(1, '哈哈', 2, '你好', 3, 4);
+      for (let velues in stt) {
+        console.log(stt[velues]);
+      }
+      for (const key of stt) {
+        console.log(key);
+      }
+      stt.push('haha');
+      stt.shift();
+      stt.unshift('baba');
+      stt.pop();
+      stt.reverse();
+      stt.concat;
+
+      stt.forEach((element) => {
+        console.log(element);
+      });
+    </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+      <tfoot></tfoot>
+    </table>
+    <style type="text/css">
+      /* h3:first-child{
+            color: red;
+        } */
+      /* h3:nth-child(6){
+            color: red;
+        } */
+      #hah > h3:nth-of-type(4) {
+        color: red;
+      }
+      #hah {
+        /* font:italic lighter 12px/12px "微软雅黑";
+           text-transform:capitalize;
+           text-decoration: none;
+           white-space:nowrap;
+           word-wrap: normal;
+           text-overflow: ellipsis;
+           overflow: hidden;
+           letter-spacing: 5px;
+           word-spacing: 5px;
+           text-align: center;
+           text-indent: 5px;
+           text-shadow: 15px 15px 12px red;
+           border: 1px dashed red;
+           border-radius: 50%;
+           margin: 12px 12px ;
+           padding: 5px;
+            background-color: rgba(254, 0, 0, 0.1);
+            opacity: 0.4;
+            background-image: url();
+            background-repeat: no-repeat;
+            background-position: left bottom;
+            background-attachment: fixed;
+            background-size: 12px;
+            background-origin: content-box;
+            background-clip: content-box;
+            background: red url() no-repeat fixed bottom top  12px  content-box content-box;
+            box-shadow: 12px 12px 12px  red inset;
+            list-style: none;
+            background-image: url(); */
+        width: 200px;
+        height: 100px;
+
+        /* background-image: radial-gradient(80px 80px at ,red,yellow,blue); */
+        /* background-image: repeating-linear-gradient(270deg ,red 7%,yellow 20%); */
+        /* background-image: repeating-radial-gradient(circle at center ,red 10%,yellow 20%); */
+        background-image: repeating-linear-gradient(
+          270deg,
+          red 10%,
+          yellow 30%
+        );
+        background-image: repeating-radial-gradient(
+          50px 50px at center,
+          red 10%,
+          blue 40%
+        );
+        font: italic bold 12px/12px '微软雅黑';
+        border: 1px dashed red;
+        background: red url() no-repeat;
+      }
+      * {
+        margin: 0px;
+        padding: 0px;
+      }
+      main {
+        background-color: black;
+        border: 1px solid green;
+      }
+      main::after {
+        content: '';
+        display: block;
+        clear: both;
+        height: 0 0;
+        visibility: hidden;
+      }
+      .box1,
+      .box2,
+      .box3 {
+        height: 50px;
+
+        line-height: 50px;
+        margin: 15px;
+        padding: 0px 10px;
+        float: left;
+      }
+      .box1 {
+        background: red;
+      }
+      .box2 {
+        background: blue;
+      }
+      .box3 {
+        background: yellowgreen;
+      }
+      input {
+        display: block;
+        outline: none;
+      }
+      .col {
+        width: 200px;
+        height: 100px;
+        background-color: black;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      div:hover {
+        background-color: red;
+        transition: background-color 3s ease-in 1s;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <header>
+      <div class="col">
+        这首诗的JFK拉萨解放拉萨发啊啊撒旦发生啦我陪她啊按时灯笼裤飞机喀什发动机阿斯蒂芬克莱斯勒搭街坊拉萨的肌肤士大夫口水都快疯了安抚库萨克地方
+      </div>
+    </header>
+    <main>
+      <!-- <div>
+
+           <p>你好啊</p>
+           <h3>看dd看</h3>
+           <h3>看<mark>搜索</mark></h3>
+           <p class="special">不    好</p>
+           <h3 class="special">哈<time>12:00</time>哈</h3>
+           <h3>看看</h3>
+           <h4>不看</h3>
+       </div>
+       <div id="hah">
+           <p>23                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              </p>
+        <h3 id="ee">dddd</h3>
+        <h3>n1</h3>
+        <h3>n2</h3>
+        <h3>n3</h3>
+        <h3>n4</h3>
+       </div>
+       
+       <a href="#noe">跳转</a>
+       <br>
+        <a href="#" id="noe">www</a> -->
+
+      <div class="box1">box1</div>
+      <div class="box2">box2</div>
+      <div class="box3">box3</div>
+    </main>
+    <nav>
+      <video src="" controls="controls" loop="loop" poster="">
+        <source src="" type="video/ogg" />
+      </video>
+      <audio src="" controls="controls" autoplay loop preload="preload">
+        <source src=" " type="" />
+      </audio>
+    </nav>
+    <footer>
+      <table>
+        <caption>
+          标题
+        </caption>
+        <tr>
+          <th>1</th>
+          <th>2</th>
+          <th>1</th>
+          <th>2</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>1</td>
+          <td>2</td>
+        </tr>
+      </table>
+      <!-- <form action="#" method="GET" autocomplete="on">
+           <fieldset >
+               <input type="text" autocomplete="no" autofocus="autofocus" pattern=""  placeholder="" required>
+               <input type="password" name="密码" id="">
+               <input type="radio" name="ja" id=""><span>一</span>
+               <input type="radio" name="ja" id=""><span>二</span>
+               <input type="checkbox" name="jj" id=""><span>舞蹈</span>
+               <input type="checkbox" name="jj" id=""><span>音乐</span>
+               <input type="checkbox" name="jj" id=""><span>花花</span>
+               <input type="file" name="文件" id="">
+               <input type="submit" value="提交">
+               <input type="reset" value="重置">
+               <input type="button" value="按钮">
+               <input type="hidden" name="看不见">
+               <input type="image" src="#" alt="哈哈">
+               <input type="email" name="邮箱" id="">
+               <input type="url" name="网址" id="">
+               <input type="search" name="搜索" id="" readonly>
+               <input type="color" name="" id="">
+               <input type="number" name="" id="" value="1" max="5" min="1" pattern="" autocomplete="" autofocus placeholder="" required>
+               <select name="" id="">
+                   <optgroup label="">
+                    <option value="" selected></option>
+                   </optgroup>
+               </select>
+               <input type="text" list="hah">
+               <datalist id="hah">
+                   <option value=""></option>
+               </datalist>
+
+           </fieldset>
+       </form> -->
+    </footer>
+  </body>
+</html>

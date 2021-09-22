@@ -1,0 +1,61 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-08-24 17:31:25
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-08-24 19:53:21
+-->
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-08-19 10:44:12
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-08-19 10:49:04
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #myBall {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myBall" width="500" height="400"></canvas>
+  <script>
+     function draw() {
+  var canvas = document.getElementById('myBall');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    // 二次贝塞尔曲线
+    ctx.beginPath();
+    ctx.moveTo(75, 40);
+    ctx.bezierCurveTo(40,40, 40,80, 75, 80);
+    ctx.quadraticCurveTo(100, 100, 125, 80);
+    ctx.quadraticCurveTo(140, 65, 125, 50);
+    ctx.quadraticCurveTo(110, 20, 75,40);
+    // ctx.bezierCurveTo(20, 25, 20, 62.5, 20, 62.5);
+    // ctx.bezierCurveTo(20, 80, 40, 102, 75, 120);
+    // ctx.bezierCurveTo(110, 102, 130, 80, 130, 62.5);
+    // ctx.bezierCurveTo(130, 62.5, 130, 25, 100, 25);
+    // ctx.bezierCurveTo(85, 25, 75, 37, 75, 40);
+    // ctx.stroke()
+    var radgrad4 = ctx.createLinearGradient(0,0,150,150);
+    radgrad4.addColorStop(0,'white');
+    radgrad4.addColorStop(1,'black');
+    ctx.fillStyle = radgrad4;
+    ctx.fill();
+   }}
+   draw()
+
+
+
+  </script>
+</body>
+</html>

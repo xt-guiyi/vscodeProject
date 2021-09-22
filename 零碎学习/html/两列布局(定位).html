@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+    #container{
+      height: 200px;
+      line-height: 200px;
+      background-color: brown;
+      position: relative;   
+    }
+    .col1{
+      width: 200px;
+      text-align: center;
+      background-color: red;
+      position: absolute;
+      left: 0px;
+    }
+    .col2{
+      width: calc(100% - 200px);
+      text-align: center;
+      background-color: yellow;
+      position:absolute;
+      left: 200px;
+   
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="col1">1</div>
+    <div class="col2">2</div>
+  </div>
+</body>
+</html>

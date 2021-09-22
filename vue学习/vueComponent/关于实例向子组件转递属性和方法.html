@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="..//vue.js"></script>
+    <title>子组件使用父组件的方法和属性</title>
+</head>
+
+<body>
+    <main id="app">
+        <!-- 给子组件绑定了sz属性和ff方法 -->
+        <my-col v-for="(prop) in props" :key="prop.id" :sz="props" @ff="show">
+    </main>
+    <template id="three1">
+        <div>
+            <h1>{{sz.title}}</h1>
+            <input type="button" value="单击" @click="myClick">
+        </div>
+    </template>
+    <script>
+        Vue.component("myCol", {
+            template: "#three1",
+            //通过props获取传来的属性
+            props: ["sz"],
+            methods: {
+                myClick(data) {
+                    //触发绑定的ff事件
+                    this.$emit('ff', ["show"])
+                }
+            },
+            
+        })
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                props: [
+                        { id: 1, title: 'My journey with Vue' },
+                        { id: 2, title: 'Blogging with Vue' },
+                        { id: 3, title: 'Why Vue is so fun' }
+                        ]
+            },
+            methods: {
+                show(data) {
+                    console.log("这是父亲的方法:" + data);
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

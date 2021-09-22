@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="..//vue.js"></script>
+    <script src="..//vue-router.js"></script>
+    <title>基本使用方式</title>
+    <style>
+        .myActive {
+            color: darkseagreen;
+        }
+        .v-enter,
+        .v-leave-to{
+            opacity: 0;
+            transform: translateX(140px);
+        }
+        .v-enter-active,
+        .v-leave-active{
+            transition: all 0.8s ease-in;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/login" tag="a">登录</router-link>
+        &nbsp;
+        <router-link to="/register">注册</router-link>
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+
+    </div>
+    <script>
+        // 定义登录和注册的模板组件
+        const login = {
+            template: '<h3>登录组件</h3>'
+        };
+        const register = {
+            template: '<h3>注册组件</h3>'
+        };
+        // 定义路由变量
+        const routerOne = new VueRouter({
+            linkActiveClass: 'myActive',
+            routes: [
+                { path: '/', redirect: '/login' },
+                { path: '/login', component: login },
+                { path: '/register', component: register }
+            ]
+        })
+        //创建vm实例
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router: routerOne,
+            //watch时候用来监听那些虚拟的东西，比如无法用事件绑定机制来监听的路由，就可以用这个
+            watch: {
+                '$route.path':function(newValue,oldValue){
+                    if(newValue=='/login'){
+                        alert("欢迎登录")
+                    }else if(newValue=='/register'){
+                        alert("欢迎注册")
+                    }
+                    console.log(newValue+'---'+oldValue)
+                }
+            },
+
+        })
+    </script>
+</body>
+
+</html>

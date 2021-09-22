@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="..//vue.js"></script>
+    <script src="..//vue-router.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/account">账户</router-link>
+        <router-view></router-view>
+    </div>
+    <template id="tmp1">
+        <div>
+            <h2>这是account组件</h2>
+            <!-- 嵌套子路由 -->
+            <router-link to="/account/login" tag="a">登录</router-link>
+            <router-link to="/account/register">注册</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+    <script>
+        const account = {
+            template: "#tmp1"
+        }
+        
+        const login = {
+            template: "<h3>登录</h3>",
+
+
+        };
+        const register = {
+            template: "<h3>注册</h3>"
+        }
+        const routerTwo = new VueRouter({
+            routes: [
+                { path: "/", redirect: "/account" },
+                {
+                    path: '/account',
+                    component: account,
+                    // 这是account的子路由属性
+                    children: [
+                        // 记住不要加斜线，不然就是与account路由同级了
+                        { path: "login", component: login },
+                        { path: 'register', component: register}
+                    ]
+                }
+            ]
+        })
+        const vm = new Vue({
+            el: "#app",
+            router: routerTwo
+        })
+    </script>
+</body>
+
+</html>

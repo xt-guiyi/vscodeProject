@@ -1,0 +1,42 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2020-05-31 21:21:22
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-01-23 14:43:28
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class类的继承</title>
+  </head>
+  <body>
+    <script>
+      class father {
+        constructor(fatherName, fatherAge) {
+          this.fatherName = fatherName;
+          this.fatherAge = fatherAge;
+        }
+        smoking() {
+          console.log('父亲在抽烟');
+        }
+      }
+
+      class children extends father {
+        constructor(fatherName, fatherAge, name, age) {
+          super(fatherName, fatherAge);
+          this.name = name;
+          this.age = age;
+        }
+        student() {
+          console.log('孩子在学习');
+        }
+      }
+
+      let xt = new children('张三', 30, '张四', 15);
+      console.info(xt);
+    </script>
+  </body>
+</html>

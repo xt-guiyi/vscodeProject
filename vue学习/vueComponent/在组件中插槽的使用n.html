@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="..//vue.js"></script>
+    <title>插槽的使用</title>
+</head>
+
+<body>
+    <div id="app">
+        <my-one>
+            <!--
+                 1-.用v-slot指令来绑定name名
+                 2-.还可获得子组件slot标签中通过 v-bind:cont="cont"绑定传来的cont数据并使用
+            -->
+            <template v-slot:header="{cont}">
+                <h3>{{cont.content}}</h>
+            </template>
+            <template v-slot:main>
+               
+            </template>
+            <!-- 
+                3-1.不指定具体slot名在组件中直接插入一段字符或html代码 
+                3-2.或者使用默认default名字来包裹多个
+            -->
+            <h3>直接插入1</h3>
+            <template v-slot:default>
+                <h3>直接插入2</h3>
+                直接插入3
+            </template>
+
+            <template v-slot:footer>
+                <h3>这是尾部</h>
+            </template>
+        </my-one>
+    </div>
+    <template id="onl">
+        <div>
+            <!-- 
+                1->用name属性设置名字的插槽 
+                2—>在slot标签中绑定子组件cont的值
+                
+            -->
+            <header>
+                <slot name="header" v-bind:cont="cont"></slot>
+            </header>
+            <!-- 
+                3->这个没有name属性的slot标签对应了23行代码部分
+                   不过不带name的<slot>标签带有隐含的名字default可以使用
+            -->
+            <slot></slot>
+            <!-- 4-还可以像现在这样在slot标签中预定义内容 -->
+            <main>
+                <slot name="main">我是预定义内容，当我没收到传递来的数据是我就会出现</slot>
+            </main>
+            <footer>
+                <slot name="footer"></slot>
+            </footer>
+        </div>
+    </template>
+    <script>
+        var hah = {
+            template: "#onl",
+            data() {
+                return {
+                    cont: {
+                        id: 1,
+                        content: "我是子组件传到vm的数据",
+                    }
+                }
+            },
+        };
+        var vm = new Vue({
+            el: "#app",
+            components: {
+                "my-one": hah,
+            },
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,220 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-07-15 17:28:41
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-07-15 17:28:42
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        html, body, ul {
+            margin: 0;
+            padding: 0;
+        }
+        .section li {
+            height: 400px;
+        }
+        li {
+            list-style: none;
+        }
+        .indexs {
+            width: 40px;
+            background-color: #000000;
+            color: #ffffff;
+            position: fixed;
+            left: 20px;
+            bottom: 50px;
+            display: none;
+        }
+        .indexs.active {
+            display: block;
+        }
+        .indexs li {
+            padding: 10px;
+            text-align: center;
+            user-select: none;
+        }
+        .indexs li.addcolor {
+            background-color: red;
+        }
+        header {
+            height: 1000px;
+            background-color: purple;
+        }
+        footer {
+            height: 200px;
+            background-color: rgb(15, 218, 15);
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+    <ul class="section">
+        <li style="background-color: palegreen;">1</li>
+        <li style="background-color: rgb(15, 218, 15);">2</li>
+        <li style="background-color: rgb(24, 203, 209);">3</li>
+        <li style="background-color: rgb(167, 152, 251);">4</li>
+        <li style="background-color: rgb(251, 152, 165);">5</li>
+        <li style="background-color: palegreen;">6</li>
+        <li style="background-color: rgb(15, 218, 15);">7</li>
+        <li style="background-color: rgb(24, 203, 209);">8</li>
+        <li style="background-color: rgb(167, 152, 251);">9</li>
+        <li style="background-color: rgb(251, 152, 165);">10</li>
+    </ul>
+    <ul class="indexs">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <footer></footer>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <script type="text/javascript">
+
+        let scrollTop = 0
+
+        let section = document.querySelector('.section')
+
+        let sectionLi = document.querySelectorAll('.section li')
+
+        let indexs = document.querySelector('.indexs')
+
+        let indexsLi = document.querySelectorAll('.indexs li')
+
+        let ofseTop = 0
+        
+        let requestId = null
+        
+        let recordScrollTop = 0
+        // 页面滚动方向
+        let scrollDirection = null
+        let diffX = 0
+        let diffY = 0
+        let scrollAction = {x: 'undefined', y: 'undefined'}
+        let lastI = 0
+        let direction = null
+
+        window.onscroll = myScroll
+        
+        function myScroll(e) {
+
+            scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+
+            // 当header滚出去时出现左侧导航
+            if (section.offsetTop -scrollTop <= 0) {
+                indexs.classList.add('active')
+            } else {
+                indexs.classList.remove('active')
+            }
+            // 滚到sectionLi对应的li时候 给indexs对应的li红色高亮
+            for (let i = 0; i < sectionLi.length; i++) {
+
+                if(sectionLi[i].offsetTop - scrollTop <= 30) { 
+                    for (let j = 0; j < indexsLi.length; j++) {
+                        indexsLi[j].classList.remove('addcolor')
+                    }
+                    indexsLi[i].classList.add('addcolor')
+                }
+                
+            }
+
+        }
+        // 点击indexs对应的li 页面滚回到section对应的li
+        for (let i = 0; i < indexsLi.length; i++) {
+            indexsLi[i].addEventListener('click', function (e) {
+
+                for (let j = 0; j < indexsLi.length; j++) {
+                    indexsLi[j].classList.remove('active')
+                }
+                // i就是被点击的那个li的索引值
+                indexsLi[i].classList.add('active')
+
+                // 记录下被点击的li的offsetTop
+                ofseTop = sectionLi[i].offsetTop
+
+                // 第一种方法 jquery 动画 这里不用jquery 用requestAnimationFrame
+                // $('html,body').animate({ 
+                //     scrollTop: ofseTop
+                // }, 300)
+                
+                // 第二种方法 requestAnimationFrame
+                if(i - lastI > 0) {
+                    direction = 'down'
+                } else if(i - lastI < 0){
+                    direction = 'up'
+                } 
+                // 更新lastI
+                lastI = i
+                
+                // 记录点击li的时候 当前页面卷出去了多少
+                recordScrollTop = document.body.scrollTop || document.documentElement.scrollTop
+                requestId = requestAnimationFrame(scrollAnimate)
+            })
+        }
+        
+        
+
+        function scrollAnimate(){
+            // 滚动条向下滚动 页面向上翻 当前页面卷出去更多
+            if (direction && direction === 'down') {
+                recordScrollTop += 30
+                if (recordScrollTop >= ofseTop) {
+                    direction = null
+                    return cancelAnimationFrame(requestId)
+                }
+
+            }
+            // 滚动条向上滚动 页面向下翻 当前页面卷出去更少
+            if (direction && direction === 'up') {
+                recordScrollTop -= 30
+                if (recordScrollTop <= ofseTop) {
+                    direction = null
+                    return cancelAnimationFrame(requestId)
+                }
+            }
+            
+
+            document.body.scrollTop = recordScrollTop
+            document.documentElement.scrollTop = recordScrollTop
+            requestId = requestAnimationFrame(scrollAnimate)
+            
+        }
+
+        // 人为鼠标滚动判断页面滚动方向 这个函数在这个案例用不到
+        function scrollFunc() {
+            if (typeof scrollAction.x == 'undefined') {
+                scrollAction.x = window.pageXOffset
+                scrollAction.y = window.pageYOffset
+            }
+            diffX = scrollAction.x - window.pageXOffset
+            diffY = scrollAction.y - window.pageYOffset
+            if (diffX < 0) {
+                // Scroll right
+                scrollDirection = 'right'
+            } else if (diffX > 0) {
+                // Scroll left
+                scrollDirection = 'left'
+            } else if (diffY < 0) {
+                // Scroll down
+                scrollDirection = 'down'
+            } else if (diffY > 0) {
+                // Scroll up
+                scrollDirection = 'up'
+            } 
+            scrollAction.x = window.pageXOffset
+            scrollAction.y = window.pageYOffset
+        }
+    </script>
+</body>
+</html>

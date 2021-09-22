@@ -1,0 +1,36 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-01-06 09:46:49
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-01-07 21:05:19
+-->
+<!DOCTYPE html>
+<html lang="zn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file" name="111" id="" multiple>
+  <script>
+    const inputObj = document.querySelector('input')
+    inputObj.addEventListener('change', (event) => {
+      console.log(event.target.files)
+      const file = event.target.files[0]
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.addEventListener('load', ()=> {
+        console.log(reader.result)
+      })
+    })
+    let buffer = new ArrayBuffer(8)
+    const dataView = new DataView(buffer);
+    dataView.setInt8(0,200)
+    let int8 =  dataView.getInt8()
+    console.log(buffer)
+    console.log(dataView,int8)
+  </script>
+</body>
+</html>

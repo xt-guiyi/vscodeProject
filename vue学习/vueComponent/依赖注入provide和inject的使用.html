@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <my-ri></my-ri>
+    </div>
+    <template id="on1">
+        <div>
+            <h3>实例的属性和方法</h3>
+            {{hahs()}}{{metas}}
+        </div>
+    </template>
+    <script>
+        // 实际上，你可以把依赖注入看作一部分“大范围有效的 prop”，
+        var hah={
+            template:"#on1",
+            inject:['meta','hahs']//用来接收provide的属性和方法
+        }
+        var vm=new Vue({
+            el:"#app",
+            data:{
+                meta:"大部分子组件都能使用的属性"
+            },
+            methods: {
+                hah(){
+                    console.log("大部分组件都能使用的方法")
+                }
+            },
+            components:{
+                "my-ri":hah
+            },
+            //用来提供给后代组件属性和方法的provide
+            provide(){
+                return{
+                    meta:this.meta,
+                    hahs:this.hah
+                }
+            }
+        })
+    </script>
+</body>
+</html>

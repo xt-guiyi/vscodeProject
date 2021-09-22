@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+    #container{
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      background-color: brown;
+    }
+    .col1{
+      /* 左列定宽 */
+      width: 200px; 
+      background-color: red;
+      /* 浮动 */
+      float: left;
+    }
+    .col2{
+      background-color: yellow;
+      /* 触发BFC */
+      overflow:hidden;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="col1">1</div>
+    <div class="col2">2</div>
+  </div>
+</body>
+</html>

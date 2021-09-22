@@ -1,0 +1,13 @@
+@charset "UTF-8";
+.el-menu {
+  border-right: 0;
+}
+
+.el-card__body {
+  height: inherit;
+}
+
+body .el-table th.gutter {
+  /*解决el-table加了gutter后 边框出现白边*/
+  display: table-cell !important;
+}

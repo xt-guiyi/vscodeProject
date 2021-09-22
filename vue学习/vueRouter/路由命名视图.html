@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="..//vue.js"></script>
+    <script src="..//vue-router.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <router-view></router-view>
+        <router-view name="left"></router-view>
+        <router-view name="main"></router-view>
+    </div>
+    <script>
+        const header={
+            template:'<h3>头部区域</h3>'
+        }
+        
+        const leftBox={
+            template:'<h3>侧边区域</h3>'
+        }
+        
+        const mainBox={
+            template:'<h3>主体区域</h3>'
+        }
+        const routerThree = new VueRouter({
+            routes:[
+                {path:'/',components:{
+                    'default':header,
+                    'left':leftBox,
+                    'main':mainBox
+                }}
+            ]
+        })
+        const vm=new Vue({
+            el:"#app",
+            router:routerThree
+        })
+    </script>
+</body>
+</html>

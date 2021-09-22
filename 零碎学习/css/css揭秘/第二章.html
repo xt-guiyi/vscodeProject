@@ -1,0 +1,132 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-07-27 14:32:29
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-07-28 15:30:55
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第二章</title>
+</head>
+<style>
+  *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html,body {
+    height: 100%;
+  }
+
+  .container {
+    background-color: burlywood;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns:  repeat(3, 33.33%);
+    justify-items:  center;
+  }
+
+  .xt-1 {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    font-size: 14px;
+    line-height:130px;
+    background-color: white;
+    border: 10px solid rgba(255, 255, 255, 0.5);
+    background-clip: padding-box;
+  }
+
+  .xt-2 {
+    height: 500px;
+    width: 500px;
+    background: white;
+    text-align: center;
+    padding: 35px;
+  }
+  .xt-2-1 {
+    width: 150px;
+    height: 150px;
+    text-align: center;
+    float: left;
+    margin: 30px;
+    background-color: skyblue;
+    box-shadow: 0 0 0 10px red,
+                0 0 0 20px blue,
+                0 0 0 25px yellow;
+  }
+
+  .xt-2-2 {
+    width: 150px;
+    height: 150px;
+    float: left;
+    margin: 30px;
+    text-align: center;
+    margin-top: 40px;
+    background-color: skyblue;
+    border: 10px solid red;
+    outline: 10px solid blue;
+  }
+  .xt-2-3 {
+    width: 200px;
+    height: 200px;
+    float: left;
+    margin: 30px;
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: skyblue;
+    border: 10px solid red;
+    outline: 2px dashed blue;
+    outline-offset: -20px;
+  }
+
+  .xt-3 {
+    height: 500px;
+    width: 500px;
+    background-color: blue;
+    text-align: center;
+  }
+
+  .xt-3-chlider {
+    height: inherit;
+    width: inherit;
+    background: url('https://privateimage-1306081565.cos.ap-shanghai.myqcloud.com/%E9%BE%99%E4%B8%8E%E8%99%8E%20(104).jpg') no-repeat ;
+    background-size: 100% 100%;
+    background-position: left  bottom;
+    /* background-clip:content-box; */
+    background-origin:content-box;
+    padding: 20px;
+  }
+</style>
+<body>
+  <div class="container">
+    <div class="xt-1">
+      半透明边框
+    </div>
+    <div class="xt-2">
+      <p>多重边框</p>
+      <div class="xt-2-1">
+        box-show方案(适用于2层以上边框的情况)
+      </div>
+      <div class="xt-2-2">
+        outline方案(适用于2层边框的情况)
+      </div>
+
+      <div class="xt-2-3">
+        outline方案(使用outline-offset控制描边和元素的距离)
+      </div>
+    </div>
+    <div class="xt-3">
+      <div class="xt-3-chlider">
+        灵活的背景定位
+      </div>
+    </div>
+  </div>
+</body>
+</html>

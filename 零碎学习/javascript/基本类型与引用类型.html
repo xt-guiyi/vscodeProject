@@ -1,0 +1,48 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-07-15 14:04:56
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-07-15 15:12:54
+-->
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2020-05-31 11:48:17
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-07-15 14:03:37
+-->
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 引用类型： 对象或数组,这里以数组为例
+      let ss = [
+        {
+          name: '熊涛'
+        },
+        {
+          name: '历史'
+        }
+      ]
+      // let a = [...ss] // 浅拷贝,只拷贝第一层，里面的没有拷贝， 变量a存储的是一个新的数组地址 a!== ss, 但是数组里面对象或数组(引用类型)的地址和ss里的相等,即a[0] === s[0]
+      // let b = ss // 变量b存储的地址等于ss的地址，b === ss， b[0] === ss[0] 完全相等
+      // a = [1,2,2] // 赋值， 改变变量a的地址
+      // a[0] = {name: 22} // 赋值, 改变数组a第零项a[0]的地址，此时 a[0] !== ss[0]
+      // a[0].name = 22 // 赋值，改变数组a第零项a[0]所指向的对象的name的地址, 此时a[0] = ss[0] = { name: 22 }
+      // b = [1,2,2] // 赋值 改变变量b的地址, b!== ss
+      // b[0] = {name: 22} // 赋值， b和ss都会改变, 此时 b[0] === ss[0]
+      // b[0].name = 22 // 赋值，b和ss都会改变, 此时 b[0] === ss[0]
+      // console.log(a)
+      // console.log(b)
+      // console.log(ss)  
+
+
+    </script>
+  </body>
+</html>

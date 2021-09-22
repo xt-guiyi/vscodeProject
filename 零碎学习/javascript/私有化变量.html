@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>私有化变量</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 1.ES5写法
+      const Person1 = (function () {
+        var _age;
+        var _sex;
+        function Person(name, age, sex) {
+          this.name = name;
+          _age = age;
+          _sex = sex;
+        }
+        Person.prototype.setName = function (name) {
+          this.name = name;
+        };
+        Person.prototype.getName = function () {
+          return this.name;
+        };
+        Person.prototype.setAge = function (age) {
+          _age = age;
+        };
+        Person.prototype.getAge = function () {
+          return _age;
+        };
+        Person.prototype.setSex = function (sex) {
+          _sex = sex;
+        };
+        Person.prototype.getSex = function () {
+          return _sex;
+        };
+        return Person;
+      })();
+      // 2.es6写法
+      const Person2 = (function () {
+        var _age;
+        var _sex;
+        class Person {
+          constructor(name, age, sex) {
+            this.name = name;
+            _age = age;
+            _sex = sex;
+          }
+          setName(name) {
+            this.name = name;
+          }
+          getName() {
+            return this.name;
+          }
+          setAge(age) {
+            _age = age;
+          }
+          getAge() {
+            return _age;
+          }
+          setSex(sex) {
+            _sex = sex;
+          }
+          getSex() {
+            return _sex;
+          }
+        }
+        return Person;
+      })();
+      var xt = new Person1('熊涛', 19, '男');
+      var zs = new Person2('张三', '18', '男');
+      console.log(xt);
+      console.log(zs);
+    </script>
+  </body>
+</html>

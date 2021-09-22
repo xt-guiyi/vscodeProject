@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="..//vue.js"></script>
+    <script src="..//vue-router.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 第二种传参方式 -->
+        <router-link to="/login/1/熊涛"  tag="a">登录</router-link>
+        <router-link to="/register">注册</router-link>
+        <router-view></router-view>
+    </div>
+    <script>
+        const login={
+            template:"<div><h3>登录</h3><h4>id:{{$route.params.id}}</h4><h4>姓名:{{$route.params.name}}</h4></div>",
+            created:function(){
+                // 可以在vm实例中的$route中的params中找到传给路由的参数
+                console.log(this.$route);
+            }
+
+        };
+        const register={
+            template:"<h3>注册</h3>"
+        }
+        const routerTwo = new VueRouter({
+            routes:[
+                {path:"/" ,redirect:"/login/:id/:name"},
+                // 对应传进来的参数
+                {path:"/login/:id/:name",component:login},
+                {path:'/register',component:register}
+            ]
+        })
+        const vm=new Vue({
+            el:"#app",
+            router:routerTwo
+        })
+    </script>
+</body>
+</html>

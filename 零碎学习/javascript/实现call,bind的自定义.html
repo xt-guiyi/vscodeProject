@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>call,bind函数</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 1.call
+      Function.prototype.MyCall = function (context, ...args) {
+        // 给要绑定的context对象添加函数方法
+        var func = Symbol();
+        context[func] = this;
+        // 执行方法
+        context[func](...args);
+        // 删除函数
+        delete context[func];
+      };
+
+      //2.bind
+      Function.prototype.MyBind = function (context, ...args) {
+        var self = this;
+        return function () {
+          self.call(context, ...args);
+        };
+      };
+
+      // 测试函数
+      function Names(name) {
+        this.name = name;
+      }
+
+      function father(name, age) {
+        Names.MyCall(this, name);
+        this.age = age;
+      }
+      var instance = new father('马云', 62);
+      console.log(instance);
+    </script>
+  </body>
+</html>

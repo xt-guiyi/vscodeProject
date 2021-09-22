@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>提交报事</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vant@2.12/lib/index.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" />
+		<meta name="description" content="全球最大的中文搜索引擎、致力于让网民更便捷地获取信息，找到所求">
+		<style type="text/css">
+			html {
+				font-size: 312.5%;
+			}
+
+			#app {
+				width: 100%;
+				height: 100vh;
+				background: #f5f5f5;
+				overflow: auto;
+			}
+
+			input,
+			textarea {
+				border: none;
+			}
+
+			.title {
+				width: 100%;
+				height: 3rem;
+				background: #4b79ff;
+				color: #ffffff;
+
+			}
+
+			.title p {
+				text-align: center;
+				font-size: .52rem;
+				padding: .7rem 1.2rem;
+				margin-top: 0;
+			}
+
+			.list {
+				background: #ffffff;
+				margin: .2rem .3rem;
+				padding: .2rem .3rem;
+				border-radius: .1rem;
+			}
+
+			.list_title {
+				font-size: .28rem;
+				color: #4b79ff;
+			}
+
+			.list_title span {
+				color: red;
+			}
+
+			.list_content {
+				width: 100%;
+				font-size: .28rem;
+				margin-top: .2rem;
+			}
+
+			.list_content input {
+				width: 100%;
+			}
+
+			.list_content textarea {
+				width: 100%;
+				height: 1.4rem;
+			}
+
+			.btn_send {
+				background: #4b79ff;
+				color: #ffffff;
+				width: 90%;
+				margin: .6rem 5%;
+				border-radius: .28rem;
+				height: .8rem;
+				line-height: .8rem;
+				border: none;
+				font-size: 0.3rem;
+			}
+
+			.danger {
+				margin-top: 3rem;
+				font-size: .52rem;
+				color: #4b79ff;
+				padding: 0 1.2rem;
+				font-weight: bold;
+				text-align: center;
+			}
+			.danger_btn{
+				background-color: #4b79ff;
+				width: 60%;
+				height: 0.8rem;
+				color: #FFFFFF;
+				border: none;
+				font-size: 0.24rem;
+				border-radius: 0.2rem;
+				position: absolute;
+				bottom: 1rem;
+				left: 20%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class='reportmessage' style="display: none;">
+				<div class="title">
+					<p :style="{padding:(nosubmit?'0.7rem 1.2rem':'1rem 1.2rem')}">{{title}}</p>
+
+				</div>
+				<div class="content" v-if="nosubmit">
+					<div class="list">
+						<div class="list_title"><span>*</span>真实姓名:</div>
+						<div class="list_content">
+							<input type="text" placeholder="请填写个人真实姓名" v-model="username">
+						</div>
+					</div>
+					<div class="list">
+						<div class="list_title"><span>*</span>联系电话:</div>
+						<div class="list_content">
+							<input type="number" placeholder="请填写个人常用手机号" maxlength="11" v-model="phone">
+						</div>
+					</div>
+					<div class="list">
+						<div class="list_title"><span>*</span>所属小区:</div>
+						<div class="list_content" @click="changeCity">
+							<textarea placeholder="请选择自己所居住的小区" readonly v-model="house"></textarea>
+						</div>
+					</div>
+					<div class="list">
+						<div class="list_title"><span>*</span>具体楼栋:</div>
+						<div class="list_content">
+							<textarea n placeholder="请填写所在小区的楼栋及号码，如8栋3单元501室" v-model="address"></textarea>
+						</div>
+					</div>
+					<van-popup v-model="showCity" position="bottom" :style="{ height: '30%' }" round>
+						<van-picker title="选择小区" show-toolbar :columns="columns" @confirm="onConfirm" @cancel="onCancel" @change="onChange" />
+					</van-popup>
+					<button class="btn_send" @click="submit">确定提交</button>
+				</div>
+				<div class="danger" v-else>
+					您的个人信息已经提交完成
+					
+					<button class="danger_btn" @click="close">关闭</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script src="https://alpha-hall.fpwan.com/sdk/fphdsdk.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios@0.21.1/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6/dist/vue.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vant@2.12/lib/vant.min.js"></script>
+<script type="text/javascript">
+	let vm = new Vue({
+		el: '#app',
+		data: {
+			username: '', //姓名
+			phone: '', //手机号
+			house: '', //小区
+			houseList: {}, //小区的信息
+			address: '', //详细地址
+			showCity: false,
+			columns: [],
+			title: '为了得到更好的服务请如实填写个人信息',
+			nosubmit: true,
+			userinfo: {
+
+			},
+		},
+		created() {
+			// FPHDskd.login();
+      console.log(111)
+
+			FPHDSdk.login({
+				channelId: '1045'
+			}, (res) => {
+        console.log(222)
+				this.userinfo = res;
+				const formData = new FormData();
+				formData.append('userId',this.userinfo.userId);
+				formData.append('channelId',this.userinfo.channelId);
+				axios.post('https://alpha-news.fpwan.com/Gridding/checkUserExtend',formData).then((res) => {
+					if (res.data.code == 0) {
+						if(res.data.data.isSubmitUserInfo == 0){
+							document.getElementsByClassName('reportmessage')[0].style.display='block';
+							axios.post('https://alpha-news.fpwan.com/Gridding/getCommunityId').then((res) => {
+								if (res.data.code == 0) {
+									res.data.data.forEach(element => {
+										element.text = element.communityName
+									});
+									this.columns = res.data.data
+								}
+							})
+						}else{
+							window.location.href="https://mp.weixin.qq.com/s/oSaGWig67W5AEP3XiRUTWw"
+						}
+					}
+				})
+			});
+			
+		},
+		methods: {
+			onConfirm(value, index) {
+				this.house = value.text;
+				this.showCity = false;
+				this.houseList = value;
+			},
+			onChange(picker, value, index) {
+				//   console.log(`当前值：${value}, 当前索引：${index}`);
+			},
+			onCancel() {
+				this.house = '';
+				this.showCity = false;
+				this.houseList = {}
+			},
+			changeCity() {
+				this.showCity = true
+			},
+			Back() {
+				this.$router.go(-1)
+			},
+			submit() {
+				const formData = new FormData();
+				formData.append('userName',this.username);
+				formData.append('userPhone',this.phone);
+				formData.append('communityId', this.houseList.communityId);
+				formData.append('homeAddress',this.address);
+				formData.append('userId',this.userinfo.userId);
+				formData.append('channelId',this.userinfo.channelId);
+				console.log(this.username,this.houseList.communityId,this.address,this.phone)
+				if(!this.username || !this.houseList.communityId|| !this.address || !this.phone){
+					vant.Toast('必填内容不能为空');
+					return
+				}
+				axios.post('https://alpha-news.fpwan.com/Gridding/updateUserExtend',formData).then((res) => {
+					if (res.data.code == 0) {
+						this.nosubmit = false;
+						this.title = '感谢您'
+						setTimeout(()=>{
+							window.location.href='https://mp.weixin.qq.com/s/oSaGWig67W5AEP3XiRUTWw'
+						},2000)
+					}else{
+						vant.Toast(res.data.msg);
+					}
+				})
+
+			},
+			close(){
+				window.location.href='https://mp.weixin.qq.com/s/oSaGWig67W5AEP3XiRUTWw'
+			}
+		}
+	});
+</script>

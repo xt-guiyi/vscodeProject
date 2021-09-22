@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>其他对象的克隆</title>
+  </head>
+  <body>
+    <script>
+      // 用valueOf方法
+      function baseClone(target) {
+        return target.valueOf();
+      }
+      var num = new Number(1);
+      var string = new String('hello');
+      var bol = new Boolean(true);
+
+      console.log(baseClone(num));
+      console.log(baseClone(string));
+      console.log(baseClone(bol));
+    </script>
+  </body>
+</html>

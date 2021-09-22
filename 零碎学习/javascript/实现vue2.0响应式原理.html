@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>响应式</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      //监听来自数组方法的添加行为
+      let ArrayProto = Array.prototype;
+      let reactiveArray = Object.create(ArrayProto);
+
+      ['push', 'pop', 'unshift', 'shift'].forEach(function (item) {
+        reactiveArray[item] = function () {
+          updateView();
+          ArrayProto[item].call(this, ...arguments);
+        };
+      });
+      // 观察函数
+      function observation(data) {
+        if (typeof data !== 'object' || data === null) {
+          throw new Error('dta属性不是对象');
+        }
+        if (Array.isArray(data)) {
+          Object.setPrototypeOf(data, reactiveArray);
+        }
+        for (const key in data) {
+          if (typeof data[key] === 'object') {
+            observation(data[key]);
+          }
+          defineReactive(data, key, data[key]);
+        }
+      }
+      // 定义响应式
+      function defineReactive(data, key, value) {
+        Object.defineProperty(data, key, {
+          set: function (newVal) {
+            if (newVal !== value) {
+              if (typeof newVal === 'object') {
+                observation(newVal);
+              }
+              updateView();
+              value = newVal;
+            }
+          },
+          get: function () {
+            return value;
+          },
+        });
+      }
+      // 更新视图操作
+      function updateView() {
+        console.log('视图更新了');
+      }
+
+      // 测试数据
+      var data = {
+        name: 'xt',
+        age: 18,
+        sex: '男',
+        deep: {
+          father: 'xgy',
+        },
+        property: [1, 2, 3, 46, 33, 11, 4, 1111, 23345, 552432, 4356, 23423453],
+      };
+      // 调用
+      observation(data);
+    </script>
+  </body>
+</html>

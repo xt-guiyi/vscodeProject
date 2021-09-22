@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <h1></h1>
+  <script>
+    $('h1:even').html('hello World')
+    $('<p>1234567890</p>').appendTo('body')
+    $('h1').each((index,elem)=>{
+      console.log(index, elem)
+    })
+    let arr = [1,2,3,4,5,6,7];
+    let newArr=arr.find((value,index,arr)=>{
+      // console.log(value,index,arr)
+      return index > 4
+    })
+    console.log(newArr)
+    console.log(arr.includes(1))
+    let newArr2 = arr.filter((value,index,arr)=>{
+      return index > 4
+    })
+    console.log(newArr2)
+
+    let newArr3 = arr.reduce((previousValue,currentValue)=>{
+      return previousValue+currentValue
+    })
+    console.log(newArr3)
+
+    // 正则替换
+    var re = 'ni: [ absdfsdvb ] ab: [sdfaadsf]'
+    // var res = /\[\s+\w+\s+\]/.test('[ absdfsdvb ]')
+    var res = re.replace(/\[(\s)+\w+(\s)+\]/g,'成功')
+    console.log(res)
+  </script>
+</body>
+</html>

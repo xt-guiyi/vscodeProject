@@ -1,0 +1,33 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2020-05-31 11:48:17
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-07-15 14:05:24
+-->
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function sleep(ms) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, ms);
+        });
+      }
+
+      async function test() {
+        var temple = await sleep(2000);
+        console.log('延迟了两秒');
+      }
+
+      test()
+    </script>
+  </body>
+</html>

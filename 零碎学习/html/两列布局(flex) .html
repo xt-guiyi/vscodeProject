@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    *{
+      padding: 0px;
+      margin: 0px;
+    }
+    #container{
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      background-color: brown;
+      display: flex;
+    }
+    .col1{
+      /* width: 200px; */
+      flex: 0 0 200px;
+      background-color: red;
+    }
+    .col2{
+      background-color: yellow;
+      flex: auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div class="col1">1</div>
+    <div class="col2">2</div>
+  </div>
+</body>
+</html>

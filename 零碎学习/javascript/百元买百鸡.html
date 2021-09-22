@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 题目
+      // 条件：现有 100 钱，一共要买公鸡、母鸡、小鸡三种鸡，已知公鸡 5 钱一只，母鸡 3 钱一只，1 钱可以买三只小鸡。
+      // 要求：公鸡、母鸡、小鸡都要有，一共买 100 只鸡。有哪几种买法，公鸡、母鸡、小鸡分别是多少只？
+
+      // 思路
+      // 此题是一个三元一次方程。
+      // 假设公鸡、母鸡、小鸡分别有 x只，y只，z只。
+      // 条件1：5x + 3y + 1 / 3z = 100(钱) ；
+      // 条件2：x + y + z = 100(只) ；得出 z = 100 - x - y；
+      // 条件1 * 3 - 条件 2 得出：
+      // 14x + 8y = 200；y = (100 - 7x) /4；7x < 100 得出 x < 15；
+
+      // for (let x = 1; x < 15; x++) {
+      //   let y, z;
+      //   y = (100 - 7 * x) / 4;
+      //   z = 100 - x - y;
+      //   if ((100 - 7 * x) % 4 == 0) {
+      //     console.log(`x:${x}  y:${y} z:${z}`);
+      //   }
+      // }
+    </script>
+  </body>
+</html>

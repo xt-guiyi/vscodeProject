@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="..//vue.js"></script>
+    <script src="..//vue-router.js"></script>
+    <title>基本使用方式</title>
+    <style>
+      /* .router-link-active{
+            color: darkseagreen;
+        } */
+      .myActive {
+        color: darkseagreen;
+      }
+      .v-enter,
+      .v-leave-to {
+        opacity: 0;
+        transform: translateX(140px);
+      }
+      .v-enter-active,
+      .v-leave-active {
+        transition: all 0.8s ease-in;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- <a href="#/login">登录</a> -->
+      <!-- 
+            可用下面这个标签代替a标签 
+            为router-link标签设置css样式可用router-link-active类设置,
+        -->
+      <router-link to="/login" tag="a">登录</router-link>
+      &nbsp;
+      <!-- <a href="#/register">注册</a> -->
+      <router-link to="/register">注册</router-link>
+      <transition mode="out-in">
+        <!-- 这是一个容器用来放置路由下的组件 -->
+        <router-view></router-view>
+      </transition>
+    </div>
+    <script>
+      // 定义登录和注册的模板组件
+      const login = {
+        template: '<h3>登录组件</h3>'
+      }
+      const register = {
+        template: '<h3>注册组件</h3>'
+      }
+      // 定义路由变量
+      const routerOne = new VueRouter({
+        // 用来更改router-link标签上的默认类router-link-active的名字
+        linkActiveClass: 'myActive',
+        // 匹配哈希模式的值
+        routes: [
+          { path: '/', redirect: '/login' },
+          { path: '/login', component: login },
+          { path: '/register', component: register }
+        ]
+      })
+      //创建vm实例
+      const vm = new Vue({
+        el: '#app',
+        data: {},
+        methods: {},
+        router: routerOne
+      })
+    </script>
+  </body>
+</html>

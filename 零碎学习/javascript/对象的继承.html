@@ -1,0 +1,43 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2020-05-29 18:33:41
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-07-15 12:50:37
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>继承</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      function names(name) {
+        this.name = name;
+      }
+      names.prototype.stn = function () {
+        console.log('这是构造名字的函数');
+      };
+
+      function people(name, age) {
+        names.call(this, name);
+        this.age = age;
+      }
+      console.log(people.prototype)
+      
+      // 设置原型
+      people.prototype = Object.create(names.prototype);
+      people.prototype.constructor = people; 
+      people.prototype.myRace = function () {
+        console.log('我是人类')
+      }
+
+      var xt = new people('熊涛', 19);
+      var s = new names('你好');
+      console.log(xt,people.prototype, Object.create(names.prototype));
+      console.log(s);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>注册组件</title>
+</head>
+
+<body>
+    <!-- 组件使用的两种方式 -->
+    <main id="app">
+        <my-one></my-one>
+        <my-two></my-two>
+    </main>z
+    <template id="ones">
+        <div>
+            <h2>{{message}}</h1>
+        </div>
+    </template>
+
+    <script>
+        //全局注册
+        Vue.component("my-one", {
+            template: "<h1>{{message}}</h1>",
+            data() {
+                return {
+                    message: "这是组件的第一种使用方式"
+                }
+            },
+        });
+        var hah = {
+            template: "#ones",
+            data() {
+                return {
+                    message: "这是组件的第二种使用方式"
+                }
+            },
+        }
+        var vm = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            //局部注册
+            components: {
+                "my-two": hah
+            }
+        })
+    </script>
+</body>
+
+</html>

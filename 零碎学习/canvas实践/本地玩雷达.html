@@ -1,0 +1,75 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-08-19 11:01:24
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-08-19 19:22:19
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #myCanvas {
+      border: 1px solid red;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="myCanvas" width="1000" height="600"></canvas>
+  <script>
+      var myCanvas = document.getElementById('myCanvas')
+      var ctx = myCanvas.getContext('2d');
+      var center = {
+        x: myCanvas.width / 2,
+        y: myCanvas.height / 2
+      }
+      
+// 2 * Math.PI (rad) = 360 (deg)
+// 1 (deg) = Math.PI / 180 (rad)
+// 1 (rad) = 180 / Math.PI (deg)
+      function calculateCoordinate (r, deg) {
+        return {
+          x: r * Math.cos(Math.PI / 180 * deg),
+          y: r * Math.sin(Math.PI / 180 * deg)
+        }
+      }
+
+      function radarLineColor(opacity) {
+        return "rgba(255,255,255," + opacity+ ")";
+      }
+      window.requestAnimationFrame(draw);
+      function draw () {
+        // ctx.clearRect(0,0,myCanvas.width,myCanvas.height)
+        ctx.fillStyle = 'rgba(0,0,0,0.3  )';
+        ctx.fillRect(0,0,myCanvas.width,myCanvas.height);
+        ctx.save()
+        ctx.translate(center.x, center.y)
+        const time = new Date();
+        // console.log( (6 * Math.PI / 180) *time.getSeconds() + (0.006 * Math.PI / 180) * time.getMilliseconds())
+        // ctx.rotate((6 * Math.PI / 180) *time.getSeconds() + (0.006 * Math.PI / 180) * time.getMilliseconds());
+        for (let i = 1; i<= 100; i++) {
+          if(i> 60) {
+          ctx.fillStyle= radarLineColor(1-(i/120)- 0.5)
+
+          }else {
+          ctx.fillStyle= radarLineColor(1-(i * 0.01)- 0.5)
+            
+          }
+          ctx.beginPath();
+          ctx.moveTo(0, 0)
+          const coordinate1 = calculateCoordinate(100,  i)
+          const coordinate2 = calculateCoordinate(100, i + 1)
+          ctx.lineTo(coordinate1.x, coordinate1.y)
+          ctx.lineTo(coordinate2.x, coordinate2.y)
+          ctx.fill()
+        }
+        ctx.restore()
+        window.requestAnimationFrame(draw); 
+      }
+  </script>
+</body>
+</html>

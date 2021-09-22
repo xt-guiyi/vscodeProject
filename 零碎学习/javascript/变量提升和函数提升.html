@@ -1,0 +1,42 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-08-05 14:46:48
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-08-05 15:25:11
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // 1. 变量和函数都存在提升现象，但是在同一个作用域下，无论书写位置怎么样，都是是变量先提升，然后再是函数提升
+    //    因此如果变量名和函数名相同，那么一定是函数(后提升)覆盖变量(先提升)（注意，前提是变量声明时没有赋值）
+
+    
+    function A () {
+      return '我是函数A'
+    }
+    var A;
+    console.log('函数写在前面，声明变量写在后面',A)  // A = function
+    var B;
+    function B () {
+      return '我是函数B'
+    }
+    console.log('声明变量写在前面，函数写在后面',B)  // B = function
+
+
+    // 如果声明变量并且赋值，由于赋值操作是没有进行提升的，所以赋值操作会最后执行，
+    var C = '12';
+    function C () {
+      return '我是函数C'
+    }
+    console.log('声明变量并且赋值',C)  // C = '12'
+  </script>
+</body>
+</html>

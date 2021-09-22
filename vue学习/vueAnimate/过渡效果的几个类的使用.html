@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="../vue.js"></script>
+    <style>
+      .my-list-enter,
+      .my-list-leave-to {
+        color: red;
+        opacity: 1;
+        transform: translateY(100%);
+      }
+
+      .my-list-enter-active,
+      .my-list-leave-active {
+        transition: all 5s ease-in;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+
+  <body>
+    <header id="app">
+      <button @click="one=!one">消失</button>
+      <!-- 
+            transition属性有name,duration appear,type
+            appear-class, 自定义过渡类名有enter-active-class, leave-active-class等用来与第三方动画库使用animate
+            还可以绑定钩子函数如v-on:before-enter|enter|after-enter|before-leave|leave|after-leave来制作半场动画 
+            过渡模式有out-in(当前元素先进行过渡，完成之后新元素过渡进入。),in-out(与out-in相反)
+        -->
+      <!-- 
+            transition-group多一个tag设置标签，过度模式不能用，内部元素必须提供key值 
+            v-move与leave-active类结合使用设置删除元素时其他元素的平滑效果
+        -->
+      <transition name="my-list">
+        <p v-if="one">消失了</p>
+      </transition>
+    </header>
+    <main></main>
+    <nav></nav>
+    <footer></footer>
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          one: true,
+        },
+        methods: {},
+      });
+    </script>
+  </body>
+</html>

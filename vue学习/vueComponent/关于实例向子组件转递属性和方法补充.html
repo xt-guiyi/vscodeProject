@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="..//vue.js"></script>
+    <title>使用方式</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 给子组件绑定属性和方法 -->
+      <my-col @click="show" :coo="foo" :foo="foo">你好{{coo}}</my-col>
+    </div>
+
+    <script>
+      var hah = {
+        //根元素不继承属性
+        inheritAttrs: false,
+        //$attrs拥有所有绑定到子组件的属性，但不包括被props获取到的。
+        //$listeners拥有所有绑定到子组件的方法，但不包括被this.$emit()所触发的。
+        template: `<div><input type="button" value="点击 "  v-bind="$attrs" v-on="$listeners">{{foo}}{{$attrs}}{{$listeners}}</div>`,
+        props: ['foo'], //父作用域属性传递通过props来储存给子组件使用
+        mounted() {
+          console.log(this.$attrs)
+          console.log(this.$listeners)
+        },
+      }
+
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          coo: '这是vm的属性coo',
+          foo: '这是vm的属性foo'
+        },
+        methods: {
+          show() {
+            console.log('我想给组件绑定事件' + this.$listeners)
+          }
+        },
+        components: {
+          'my-col': hah
+        }
+      })
+    </script>
+  </body>
+</html>
+

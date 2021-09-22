@@ -1,0 +1,229 @@
+<!--
+ * @Description: 
+ * @Author: 小熊熊
+ * @Date: 2021-07-29 10:07:27
+ * @LastEditors: 小熊熊
+ * @LastEditTime: 2021-07-29 19:33:34
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+   *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html,body {
+    height: 100%;
+  }
+
+  .container {
+    background-color: burlywood;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns:  repeat(3, 33.33%);
+    justify-items:  center;
+  }
+
+  .xt-1 {
+    height: 300px;
+    width: 500px;
+    background: skyblue;
+    background-clip: content-box;
+  }
+
+  .xt-1-1 {
+    height: 100px;
+    width: 200px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 16px;
+    display:inline-block;
+    margin-left: 50px;
+    background: yellow;
+    transform: skew(-45deg);
+  }
+  
+  .xt-1-1 p{
+    transform: skew(45deg);
+  }
+
+  .xt-1-2 {
+    position: relative;
+    z-index: 1;
+    height: 100px;
+    width: 200px;
+    text-align: center;
+    line-height: 100px;
+    font-size: 16px;
+    margin-left: 50px;
+  }
+
+  .xt-1-2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    background: red;
+    transform: skew(45deg);
+
+  }
+
+  .xt-2 {
+    height: 300px;
+    width: 500px;
+    background: skyblue;
+    background-clip: content-box;
+    border-radius: 15px;
+    corner-shape: bevel;
+  }
+
+  .xt-2-1 {
+    width: 100px;
+    height: 100px;
+    transform: rotate(-45deg);
+    overflow: hidden;
+    margin: 20px;
+  }
+
+  .xt-2-1 img {
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
+    transform: rotate(45deg) scale(142%);
+  }
+
+  .xt-2-2 {
+    width: 100px;
+    height: 100px;
+    clip-path: polygon(50% 0, 0 50%, 50% 100%, 100% 50%);
+  }
+
+  .xt-2-2 img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .xt-3 {
+    width: 250px;
+    height: 100px;
+    line-height: 100px;
+    font-size: 16px;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .xt-3::before {
+    content: '';
+    background: lightpink;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+    transform: perspective(100px) rotateX(15deg) scaleY(130%);
+    transform-origin: bottom;
+  }
+
+  .xt-4 {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: lightseagreen;
+    background-image: linear-gradient(90deg, transparent 50%, #655 50%);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .xt-4::before {
+    content: '';
+    height: 100%;
+    margin-left: 50%;
+    background-color: inherit;
+    transform-origin: left;
+    /* transform: rotate(.1turn); */
+    display: block;
+    animation: circleRotate 3s linear infinite,
+              changeColor 6s step-end infinite;
+  }
+
+  /* .xt-4::after {
+    content: '';
+    height: 80%;
+    width: 80%;
+    border-radius: 50%;
+    background-color: burlywood;
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  } */
+
+  @keyframes circleRotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(180deg);
+    }
+  }
+
+  @keyframes changeColor {
+    50% {
+      background-color: #655;
+    }
+  }
+
+  .xt-5 {
+    height: 200px;
+    width: 200px;
+
+  }
+
+  
+
+</style>
+<body>
+  <div class="container">
+    <div class="xt-1">
+      <div class="xt-1-1"><p>传统平行四边形</p></div>
+      <div class="xt-1-2">伪元素平行四边形</div>
+    </div>
+    <div class="xt-2">
+      <div class="xt-2-1">
+        <!-- 菱形(兼容性好，但图片必须为正方形) -->
+        <img src="https://privateimage-1306081565.cos.ap-shanghai.myqcloud.com/%E9%BE%99%E4%B8%8E%E8%99%8E%20(104).jpg" alt="">
+      </div>
+      <!-- 菱形（clip-path） -->
+      <div class="xt-2-2">
+        <img src="https://privateimage-1306081565.cos.ap-shanghai.myqcloud.com/%E9%BE%99%E4%B8%8E%E8%99%8E%20(104).jpg" alt="">
+      </div>
+    </div>
+    <div class="xt-3">
+        梯型形(伪元素加3D)
+    </div>
+    <div class="xt-4">
+      <!-- 简单饼图(伪元素加旋转)| 进度条 -->
+    </div>
+    <svg class="xt-5">
+      <!-- 简单饼图(svg)| 进度条 -->
+      <circle r="50" cx="100" cy="100"  fill="lightseagreen" stroke="blue" stroke-width="10"  stroke-dasharray="150 314"></circle>
+    </svg>
+  </div>
+</body>
+<script>
+
+</script>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../vue.js"></script>
+    <title>组件切换效果</title>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.8s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 实现组件切换和过渡效果 -->
+    <div id="app">
+        <a href="#" @click.prevent="is='login'">登录</a>&nbsp;
+        <a href="#" @click.prevent="is='register'">注册</a><br>
+        <!-- mode过度模式有两种out-in和in-out -->
+        <transition mode="out-in">
+            <!-- 添加标签并使用is属性 -->
+            <component :is="is"></component>
+        </transition>
+    </div>
+    <script>
+        Vue.component("register", {
+            template: "<h1>注册页面</h1>"
+        });
+        Vue.component("login", {
+            template: "<h1>登录页面</h1>"
+        })
+
+
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                is: "login"
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>节流与防抖</title>
+  </head>
+  <body>
+    <h1>1</h1>
+    <h1>2</h1>
+    <h1>3</h1>
+    <h1>4</h1>
+    <h1>5</h1>
+    <h1>6</h1>
+    <h1>7</h1>
+    <h1>8</h1>
+    <h1>9</h1>
+    <h1>10</h1>
+    <h1>11</h1>
+    <h1>12</h1>
+    <h1>13</h1>
+    <h1>14</h1>
+    <h1>15</h1>
+    <h1>16</h1>
+    <h1>17</h1>
+    <h1>18</h1>
+    <h1>19</h1>
+    <h1>20</h1>
+    <h1>21</h1>
+    <h1>22</h1>
+    <h1>23</h1>
+    <h1>24</h1>
+    <h1>25</h1>
+    <h1>26</h1>
+    <h1>27</h1>
+    <h1>28</h1>
+    <h1>29</h1>
+    <h1>30</h1>
+    <h1>31</h1>
+    <h1>32</h1>
+    <h1>33</h1>
+    <h1>34</h1>
+    <h1>35</h1>
+    <h1>36</h1>
+    <h1>37</h1>
+    <h1>38</h1>
+    <h1>39</h1>
+    <h1>40</h1>
+    <h1>41</h1>
+    <h1>42</h1>
+    <h1>43</h1>
+    <h1>44</h1>
+    <h1>45</h1>
+    <h1>46</h1>
+    <h1>47</h1>
+    <h1>48</h1>
+    <h1>49</h1>
+    <h1>50</h1>
+    <script>
+      /*
+       *防抖原理：
+       *用超时器，每次触发时清除上一个定时器，这样就只能在规定的时间段触发
+       */
+      function debounce(func, wait) {
+        var timeout;
+        return function () {
+          clearTimeout(timeout);
+          timeout = setTimeout(func, wait);
+        };
+      }
+
+      // 节流原理,多了一个规定触发时间参数
+      function throttle(func, wait, mustRun) {
+        var timeout;
+        var startTime = new Date();
+        return function (...reset) {
+          var endTime = new Date();
+          clearTimeout(timeout);
+          if (endTime - startTime > mustRun) {
+            func.apply(this, reset);
+            startTime = new Date();
+          }
+          timeout = setTimeout(()=>{
+            func
+          }, wait);
+        };
+      }
+      // 要执行的操作
+      var myOperation1 = debounce(function (e) {
+        console.log(document.documentElement.scrollTop);
+      }, 250);
+      var myOperation2 = throttle(
+        function (e) {
+          console.log(e)
+          console.log(document.documentElement.scrollTop);
+        },
+        500,
+        1000
+      );
+      // 绑定scroll事件
+      window.addEventListener('scroll', myOperation1);
+    </script>
+  </body>
+</html>

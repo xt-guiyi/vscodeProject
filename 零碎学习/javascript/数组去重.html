@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>数组去重的几种方式</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      // 1.set集合去重
+      var arr = [2, 4, 4, 5, 2, 7, 9, 9, 14, 14, 9];
+      function dedupe1(arr) {
+        if (arr instanceof Array) {
+          var newArr = [...new Set(arr)];
+          return newArr;
+        }
+        return -1;
+      }
+      // 2.indexOf去重
+      function dedupe2(arr) {
+        var newArr = arr.filter((item, index) => {
+          return arr.indexOf(item) === index;
+        });
+        return newArr;
+      }
+      function dedupe3(arr) {
+        var newArr = arr.reduce((pre, item) => {
+          return pre.includes(item) ? pre : [...pre, item];
+        }, []);
+        return newArr;
+      }
+      console.log(dedupe1(arr));
+      console.log(dedupe2(arr));
+      console.log(dedupe3(arr));
+    </script>
+  </body>
+</html>

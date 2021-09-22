@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="..//vue.js"></script>
+    <title>关于v-model在组件的使用</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- 对组件添加v-model=searchText相当于v-bind:value="searchText"和v-on:input="searchText=$event" -->
+      <search-text v-model="searchText"></search-text>
+      <h3>{{searchText}}</h3>
+    </div>
+    <script>
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          searchText: ''
+        },
+        components: {
+          searchText: {
+            template: `<div><input :value='value' @input='$emit("input",$event.target.value)' ></div>`,
+            props: ['value']
+            //所以我们必须要在component的props属性中添加value来导入vm实
+            //例中的属性，然后再添加@input='$emit("input",$event.target.value）触发父方法input来传值。
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
